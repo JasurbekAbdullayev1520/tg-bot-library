@@ -20,7 +20,7 @@ def add_user(tg_id: int, full_name: str, username: str | None = None):
     users = get_users()
 
     if str(tg_id) not in users:
-        users[tg_id] = {
+        users[str(tg_id)] = {
             'full_name': full_name,
             'username': username
         }

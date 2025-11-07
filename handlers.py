@@ -23,7 +23,9 @@ def start(update: Update, context: CallbackContext):
             text=f'qaytganingiz bilan {update.message.from_user.full_name}.',
             reply_markup=ReplyKeyboardMarkup(
                 keyboard=[
-                    ['Bosh Sahifa', 'Aloqa']
+                    ['🛍 Buyrtma berish'],
+                    ['⚙️ Sozlamalar', '📦 Buyurtmalarim'],
+                    ['ℹ️ Biz haqimizda', '✍️ Fikr qoldirish']
                 ]
             )
         )
@@ -53,4 +55,106 @@ def send_products(update: Update, context: CallbackContext):
     update.message.reply_text('mana barcha mahsulotlar')
 
 def main_menu(update: Update, context: CallbackContext):
-    update.message.reply_text('asosiy sahifaga keldiz')
+    update.message.reply_text(
+                text=f'{update.message.from_user.full_name} bosh menyuga xush kelibsiz.',
+                reply_markup=ReplyKeyboardMarkup(
+                    keyboard=[
+                        ['🛍 Buyrtma berish'],
+                        ['⚙️ Sozlamalar', '📦 Buyurtmalarim'],
+                        ['ℹ️ Biz haqimizda', '✍️ Fikr qoldirish']
+                    ]
+                )
+            )
+
+def order(update: Update, context: CallbackContext):
+    context.user_data["state"] = "order"
+    update.message.reply_text(
+        text=f"{update.message.from_user.full_name} sizda hali buyurtmalar yo'q.",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                ["⬅️ Orqaga"]
+            ]
+        )
+    )
+    
+def about_us(update: Update, context: CallbackContext):
+    context.user_data["state"] = "about_us"
+    update.message.reply_text(
+        text="""shu yerda joylashganmiz
+Elektron pochta: abror4work@gmail.com""",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                ["⬅️ Orqaga"]
+            ]
+        )
+    )
+
+def coment(update: Update, context: CallbackContext):
+    context.user_data["state"] = "coment"
+    update.message.reply_text(
+        text="✍️ Bizga o'z fikringizni qoldiring",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                ["⬅️ Orqaga"]
+            ]
+        )
+    )
+    
+def settings(update: Update, context: CallbackContext):
+    context.user_data["state"] = "settings" 
+    update.message.reply_text(
+        text=f"{update.message.from_user.full_name} nimani o'zgartirmoqchisiz",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                ["🌐 Tilni o'zgartirish"],
+                ["📞 Telefon raqamingizni o'zgartiring"],
+                ["⬅️ Orqaga"]
+            ]
+        )
+    )
+def lenguage(update: Update, context: CallbackContext):
+    context.user_data["state"] = "language" 
+    update.message.reply_text(
+        text="🌐 Tilni tanlang",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                ["🇺🇸 English"], ["🇺🇿 O'zbekcha"],
+                ["🇷🇺 Русский"],
+                ["⬅️ Orqaga"]
+            ]
+        )
+    )
+def phone_number(update: Update, context: CallbackContext):
+    context.user_data["state"] = "phone_number" 
+    update.message.reply_text(
+        text="📞 Telefon raqamingizni o'zgartiring",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                ["📞 Mening raqamim"],
+                ["⬅️ Orqaga"]   
+            ]
+        )
+    )
+
+def back(update: Update, context: CallbackContext):
+    text = update.message.text
+    if text == "⬅️ Orqaga":
+        current_state = context.user_data.get("state")
+
+        if current_state == "language":
+            settings(update, context)
+
+        elif current_state == "phone_number":
+            settings(update, context)
+        
+        elif current_state == "settings":
+            main_menu(update, context)
+        
+        elif current_state == "order":
+            main_menu(update, context)
+            
+        elif current_state == "about_us":
+            main_menu(update, context)
+            
+        elif current_state == "coment":
+            main_menu(update, context)
