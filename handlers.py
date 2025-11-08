@@ -50,6 +50,11 @@ def echo_photo(update: Update, context: CallbackContext):
     update.message.reply_photo(
         update.message.photo[1]
     )
+    
+def echo_video(update: Update, context: CallbackContext):
+    update.message.reply_video_note(
+        update.message.video_note
+    )
 
 def send_products(update: Update, context: CallbackContext):
     update.message.reply_text('mana barcha mahsulotlar')

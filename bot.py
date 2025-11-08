@@ -12,7 +12,7 @@ from handlers import (
     main_menu, settings,
     lenguage, back, order,
     phone_number, about_us,
-    coment
+    coment, echo_video
 )
 
 
@@ -35,6 +35,7 @@ dispatcher.add_handler(MessageHandler(Filters.text("ℹ️ Biz haqimizda"),about
 dispatcher.add_handler(MessageHandler(Filters.text("✍️ Fikr qoldirish"),coment))
 dispatcher.add_handler(MessageHandler(Filters.text, echo_text))
 dispatcher.add_handler(MessageHandler(Filters.photo, echo_photo))
+dispatcher.add_handler(MessageHandler(Filters.video_note, echo_video))
 
 # botni ishga tushurish
 updater.start_polling()
