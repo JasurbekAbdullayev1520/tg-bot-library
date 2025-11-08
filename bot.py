@@ -12,7 +12,8 @@ from handlers import (
     main_menu, settings,
     lenguage, back, order,
     phone_number, about_us,
-    coment, echo_video
+    coment, echo_video, echo_animation, echo_stiker,
+    echo_video_note
 )
 
 
@@ -36,6 +37,10 @@ dispatcher.add_handler(MessageHandler(Filters.text("✍️ Fikr qoldirish"),come
 dispatcher.add_handler(MessageHandler(Filters.text, echo_text))
 dispatcher.add_handler(MessageHandler(Filters.photo, echo_photo))
 dispatcher.add_handler(MessageHandler(Filters.video_note, echo_video))
+dispatcher.add_handler(MessageHandler(Filters.video_note, echo_stiker))
+dispatcher.add_handler(MessageHandler(Filters.video_note, echo_animation))
+dispatcher.add_handler(MessageHandler(Filters.video_note, echo_video_note))
+
 
 # botni ishga tushurish
 updater.start_polling()
