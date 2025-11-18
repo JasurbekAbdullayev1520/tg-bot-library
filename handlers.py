@@ -25,7 +25,7 @@ def start(update: Update, context: CallbackContext):
                             text='📦 Buyurtmalarim'
                         ),
                         KeyboardButton(
-                            text='⚙️ Sozlamalar'
+                            text='⚙️ Sozlamalar' 
                         )
                         ],
                         [
